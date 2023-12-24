@@ -1,0 +1,17 @@
+frontend
+
+npm i vite@latest
+npm i react-router-dom
+npm i mui
+npm i @mui/material
+npm i @emotion/react
+npm i @emotion/styled
+npm i axios
+
+
+backend
+
+npm init
+mpm i express cors
+npm install -g nodemon  ( run nodemn using nodemon server.js or nodemon index.js) 
+
