@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     id:Number, 
-    name:String,
+    name:String,  
 });    
 
 // Assign userSchema to a  odel called 'User'

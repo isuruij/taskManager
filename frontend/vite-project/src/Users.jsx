@@ -10,7 +10,7 @@ import { useState } from "react";
 const Users = () => {
 
   const [users, setusers] = useState([]);
-  const [submitted, setsubmitted] = useState(false);
+  const [isSubmitted, setisSubmitted] = useState(false);
 
   useEffect(()=>{
     getUsers();
@@ -22,23 +22,25 @@ const Users = () => {
       try{
         const response = await Axios.get("http://localhost:3001/users");
         console.log(response.data);
+
         setusers(response.data);
       }catch(error){
-          console.log(error)
+          console.log(error) 
       } 
 
   }
 
 
   const addUsers = async (data)=>{
-    setsubmitted(true);
+    
     const payload = data;
     try{
       Axios.post("http://localhost:3001/users",payload);
-      console.log(payload);
-      setsubmitted(false);
+      
       getUsers();
-      setusers(response.data);
+      setisSubmitted(!isSubmitted);
+      
+      
     }catch(error){
         console.log(error)
     }
@@ -46,8 +48,10 @@ const Users = () => {
 
   return (
     <Box>
-      <UserForm  addUsers={addUsers} submitted={submitted} />
-      {/* For this prop called rows, you can give any name */}
+      <UserForm  addUsers={addUsers} isSubmitted={isSubmitted} />
+      {/* For this prop called rows, you can give any name
+      Through this prop called rows we pass a users array to UserTable component */}
+
       <UserTable rows={users} />
     </Box>
   );
