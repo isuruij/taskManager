@@ -25,7 +25,7 @@ const Users = () => {
         setusers(response.data);
       }catch(error){
           console.log(error)
-      }
+      } 
 
   }
 

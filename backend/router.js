@@ -9,7 +9,7 @@ router.post("/users", async (req, res) => {
    
     try {  
       await user.save();
-      res.status(201).send(201).send(user);
+      res.status(201).send(user);
     } catch (error) {
       res.status(400).send(error);
     }
@@ -43,7 +43,7 @@ router.post("/users", async (req, res) => {
         { name: req.params.name },
         req.body,
         { new: true }
-      );
+      ); 
   
       if (!updatedUser) {
         return res.status(404).send({ message: "User not found" });

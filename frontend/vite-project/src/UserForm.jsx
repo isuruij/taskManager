@@ -92,7 +92,7 @@ function UserForm({addUsers,submitted}) {
 
                 </Grid>
         </div>
-    );
+    );   
 }
 
 export default UserForm;
