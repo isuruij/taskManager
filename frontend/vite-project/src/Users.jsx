@@ -8,6 +8,8 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [tableKey, setTableKey] = useState(0); // New state for re-rendering UserTable
+  const [isEdit, setisEdit] = useState(false);
+  const [selectedUser, setselectedUser] = useState({});
 
   useEffect(() => {
     getUsers();
@@ -30,17 +32,43 @@ const Users = () => {
     try {
       await Axios.post("http://localhost:3001/users", payload);
       setIsSubmitted(!isSubmitted);
+      setisEdit(false);
     } catch (error) {
       console.log(error);
     }
   };
 
+
+  const updateUser = async (data) => {
+    const payload = data;
+    try {
+      await Axios.patch("http://localhost:3001/updateusers", payload);
+      setIsSubmitted(!isSubmitted);
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
   return (
     <Box>
-      <UserForm addUsers={addUsers} isSubmitted={isSubmitted} />
+      <UserForm 
+        addUsers={addUsers}
+        isSubmitted={isSubmitted} 
+        data={selectedUser} 
+        isEdit={isEdit} 
+        updateUser={updateUser}
+        />
       {/* For this prop called key, you can give any name
       Through this prop called key we pass a unique key to UserTable component */}
-      <UserTable key={tableKey} rows={users} />
+      <UserTable 
+        key={tableKey} 
+        rows={users} 
+        selectedUser={(data) => { 
+          setselectedUser(data);
+          setisEdit(true);
+        }} 
+      />
     </Box>
   );
 };

@@ -23,7 +23,7 @@ router.post("/users", async (req, res) => {
     } catch (error) { 
       res.status(400).send(error);  
     } 
-  }); 
+  });  
 
 
   router.get("/users", async (req, res) => {
@@ -35,12 +35,33 @@ router.post("/users", async (req, res) => {
     } 
   });  
 
- 
-
+    
+// update request from parameters ( data in the url )
   router.patch("/users/:name", async (req, res) => {
     try {
       const updatedUser = await User.findOneAndUpdate(
         { name: req.params.name },
+        req.body,
+        { new: true }
+      ); 
+  
+      if (!updatedUser) {
+        return res.status(404).send({ message: "User not found" });
+      }
+  
+      res.status(200).send({ message: "User updated successfully", updatedUser });
+    } catch (error) {
+      res.status(400).send({ message: "Bad Request", error });
+    }
+  });
+
+
+
+// update the user which that has the similar id in the request 
+  router.patch("/updateusers", async (req, res) => {
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { id: req.body.id },
         req.body,
         { new: true }
       ); 

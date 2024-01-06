@@ -10,12 +10,12 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const UserTable = ({ rows }) => {
+const UserTable = ({ rows ,selectedUser}) => {
   return (
     <TableContainer component={Paper}>
         <h5>{rows.length}</h5>
       <Table>
-      <TableHead>
+        <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell>Name</TableCell>
@@ -32,7 +32,7 @@ const UserTable = ({ rows }) => {
                 {row.name}
               </TableCell>
               <TableCell>
-                <Button sx={{ margin: "0px 10px" }} onClick={() => {}}>
+                <Button sx={{ margin: "0px 10px" }} onClick={() => {selectedUser({id:row.id,name:row.name})}}>
                   Update
                 </Button>
                 <Button sx={{ margin: "0px 10px" }} onClick={() => {}}>
