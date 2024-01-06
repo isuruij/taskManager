@@ -15,10 +15,12 @@ const UserTable = ({ rows }) => {
     <TableContainer component={Paper}>
         <h5>{rows.length}</h5>
       <Table>
-        <TableHead>
-          <TableCell>ID</TableCell>
-          <TableCell>Name</TableCell>
-          <TableCell>Actions</TableCell>
+      <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Actions</TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
           {rows.length>0 ? rows.map((row) => (

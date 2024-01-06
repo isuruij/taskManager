@@ -1,58 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import UserForm from "./UserForm";
 import UserTable from "./UserTable";
 import { Box } from "@mui/material";
-import Axios from "axios"
-import { useState } from "react";
-
-
+import Axios from "axios";
 
 const Users = () => {
+  const [users, setUsers] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [tableKey, setTableKey] = useState(0); // New state for re-rendering UserTable
 
-  const [users, setusers] = useState([]);
-  const [isSubmitted, setisSubmitted] = useState(false);
-
-  useEffect(()=>{
+  useEffect(() => {
     getUsers();
-  },[]);
+  }, [isSubmitted]); // useEffect will run when isSubmitted changes
 
-
-
-  const getUsers = async ()=>{
-      try{
-        const response = await Axios.get("http://localhost:3001/users");
-        console.log(response.data);
-
-        setusers(response.data);
-      }catch(error){
-          console.log(error) 
-      } 
-
-  }
-
-
-  const addUsers = async (data)=>{
-    
-    const payload = data;
-    try{
-      Axios.post("http://localhost:3001/users",payload);
-      
-      getUsers();
-      setisSubmitted(!isSubmitted);
-      
-      
-    }catch(error){
-        console.log(error)
+  const getUsers = async () => {
+    try {
+      const response = await Axios.get("http://localhost:3001/users");
+      setUsers(response.data);
+      console.log("users are set");
+      // Incrementing tableKey to force a re-render of UserTable
+      setTableKey((prevKey) => prevKey + 1);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+
+  const addUsers = async (data) => {
+    const payload = data;
+    try {
+      await Axios.post("http://localhost:3001/users", payload);
+      setIsSubmitted(!isSubmitted);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box>
-      <UserForm  addUsers={addUsers} isSubmitted={isSubmitted} />
-      {/* For this prop called rows, you can give any name
-      Through this prop called rows we pass a users array to UserTable component */}
-
-      <UserTable rows={users} />
+      <UserForm addUsers={addUsers} isSubmitted={isSubmitted} />
+      {/* For this prop called key, you can give any name
+      Through this prop called key we pass a unique key to UserTable component */}
+      <UserTable key={tableKey} rows={users} />
     </Box>
   );
 };

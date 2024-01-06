@@ -3,8 +3,8 @@ import { Button, Grid, Input, Typography } from "@mui/material";
 
 const UserForm =({addUsers,isSubmitted})=>{
 
-    const [id, setid] = useState();
-    const [name, setname] = useState();
+    const [id, setid] = useState(0);
+    const [name, setname] = useState("");
     
 
     useEffect(()=>{
