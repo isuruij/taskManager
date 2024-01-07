@@ -60,7 +60,7 @@ router.post("/users", async (req, res) => {
   }); 
    
 
-//delete the user which that has the similar id in the params
+//delete the user which that has the similar id in the params 
   router.delete("/deleteusers/:id", async (req, res) => {
     try {
       const deletedUser = await User.findOneAndDelete({ id: req.params.id });
