@@ -44,8 +44,25 @@ const Users = () => {
     try {
       await Axios.patch("http://localhost:3001/updateusers", payload);
       setIsSubmitted(!isSubmitted);
+      setisEdit(false);
     } catch (error) {
       console.log(error);
+    }
+
+  };
+
+
+
+
+  const deleteUser = async (data) => {
+    
+    try {
+      
+      console.log(data.id);
+      await Axios.delete(`http://localhost:3001/deleteusers/${data.id}`);
+      setIsSubmitted(!isSubmitted);
+    } catch (error) {
+      console.log(error); 
     }
 
   };
@@ -68,6 +85,7 @@ const Users = () => {
           setselectedUser(data);
           setisEdit(true);
         }} 
+        deleteUser={(data)=>{window.confirm("Are you sure?") && deleteUser(data)}}
       />
     </Box>
   );

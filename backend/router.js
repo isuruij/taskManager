@@ -36,24 +36,7 @@ router.post("/users", async (req, res) => {
   });  
 
     
-// update request from parameters ( data in the url )
-  router.patch("/users/:name", async (req, res) => {
-    try {
-      const updatedUser = await User.findOneAndUpdate(
-        { name: req.params.name },
-        req.body,
-        { new: true }
-      ); 
-  
-      if (!updatedUser) {
-        return res.status(404).send({ message: "User not found" });
-      }
-  
-      res.status(200).send({ message: "User updated successfully", updatedUser });
-    } catch (error) {
-      res.status(400).send({ message: "Bad Request", error });
-    }
-  });
+
 
 
 
@@ -74,12 +57,49 @@ router.post("/users", async (req, res) => {
     } catch (error) {
       res.status(400).send({ message: "Bad Request", error });
     }
-  });
+  }); 
+   
+
+//delete the user which that has the similar id in the params
+  router.delete("/deleteusers/:id", async (req, res) => {
+    try {
+      const deletedUser = await User.findOneAndDelete({ id: req.params.id });
+   
+      if (!deletedUser) {
+        // If no user with the specified name is found
+        return res.status(404).send({ message: "User not found" });
+      }
   
+      res.status(200).send({ message: "User deleted successfully", deletedUser });
+    } catch (error) {
+      res.status(500).send({ message: "Internal Server Error" });
+    }
+  });
 
 
+  //Below two apis are not used in the frontend but used in postman
+
+  // update request from parameters ( data in the url )
+  router.patch("/users/:name", async (req, res) => {
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { name: req.params.name },
+        req.body,
+        { new: true }
+      ); 
+  
+      if (!updatedUser) {
+        return res.status(404).send({ message: "User not found" });
+      }
+  
+      res.status(200).send({ message: "User updated successfully", updatedUser });
+    } catch (error) {
+      res.status(400).send({ message: "Bad Request", error });
+    }
+  });
 
 
+// delete request from parameters ( data in the url )
   router.delete("/users/:name", async (req, res) => {
     try {
       const deletedUser = await User.findOneAndDelete({ name: req.params.name });

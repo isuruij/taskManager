@@ -28,10 +28,11 @@ const UserForm =({addUsers,isSubmitted,data,isEdit,updateUser})=>{
                     backgroundColor: "white",
                     marginBottom: "30px",
                     display: "block",
+                
                 }}
             >
                 <Grid item xs={12}>
-                    <Typography component={"h1"} sx={{ color: "#000000" }}>
+                    <Typography component={"h1"} sx={{ color: "#000000" ,marginLeft: '-50px',}}>
                         User Form
                     </Typography>
                 </Grid>
@@ -88,7 +89,7 @@ const UserForm =({addUsers,isSubmitted,data,isEdit,updateUser})=>{
                     marginBottom: '20px',
                     backgroundColor: '#00c6e6',
                     color: "#000000",
-                    marginLeft: '50px',
+                    marginLeft: '-20px',
                     marginTop: '20px',
                     '&:hover': {
                         backgroundColor: '#00c6e6',
