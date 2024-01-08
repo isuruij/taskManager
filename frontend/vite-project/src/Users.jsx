@@ -17,7 +17,7 @@ const Users = () => {
 
   const getUsers = async () => {
     try {
-      const response = await Axios.get("http://localhost:3001/users");
+      const response = await Axios.get(process.env.RECT_APP_ENDPOINT+"/users");
       setUsers(response.data);
       console.log("users are set");
       // Incrementing tableKey to force a re-render of UserTable
@@ -30,7 +30,7 @@ const Users = () => {
   const addUsers = async (data) => {
     const payload = data;
     try {
-      await Axios.post("http://localhost:3001/users", payload);
+      await Axios.post(+process.env.RECT_APP_ENDPOINT"users", payload);
       setIsSubmitted(!isSubmitted);
       setisEdit(false);
     } catch (error) {
@@ -42,7 +42,7 @@ const Users = () => {
   const updateUser = async (data) => {
     const payload = data;
     try {
-      await Axios.patch("http://localhost:3001/updateusers", payload);
+      await Axios.patch(process.env.RECT_APP_ENDPOINT+"updateusers", payload);
       setIsSubmitted(!isSubmitted);
       setisEdit(false);
     } catch (error) {
@@ -59,7 +59,7 @@ const Users = () => {
     try {
       
       console.log(data.id);
-      await Axios.delete(`http://localhost:3001/deleteusers/${data.id}`);
+      await Axios.delete(process.env.RECT_APP_ENDPOINT+`deleteusers/${data.id}`);
       setIsSubmitted(!isSubmitted);
     } catch (error) {
       console.log(error); 
