@@ -3,6 +3,7 @@ import UserForm from "./UserForm";
 import UserTable from "./UserTable";
 import { Box } from "@mui/material";
 import Axios from "axios";
+import { json } from "react-router-dom";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -17,7 +18,7 @@ const Users = () => {
 
   const getUsers = async () => {
     try {
-      const response = await Axios.get(process.env.RECT_APP_ENDPOINT+"/users");
+      const response = await Axios.get(import.meta.env.VITE_REACT_APP_ENDPOINT+`/users`);
       setUsers(response.data);
       console.log("users are set");
       // Incrementing tableKey to force a re-render of UserTable
@@ -30,7 +31,7 @@ const Users = () => {
   const addUsers = async (data) => {
     const payload = data;
     try {
-      await Axios.post(+process.env.RECT_APP_ENDPOINT"users", payload);
+      await Axios.post(import.meta.env.VITE_REACT_APP_ENDPOINT+"/users", payload);
       setIsSubmitted(!isSubmitted);
       setisEdit(false);
     } catch (error) {
@@ -42,7 +43,7 @@ const Users = () => {
   const updateUser = async (data) => {
     const payload = data;
     try {
-      await Axios.patch(process.env.RECT_APP_ENDPOINT+"updateusers", payload);
+      await Axios.patch(import.meta.env.VITE_REACT_APP_ENDPOINT+"/updateusers", payload);
       setIsSubmitted(!isSubmitted);
       setisEdit(false);
     } catch (error) {
@@ -59,7 +60,7 @@ const Users = () => {
     try {
       
       console.log(data.id);
-      await Axios.delete(process.env.RECT_APP_ENDPOINT+`deleteusers/${data.id}`);
+      await Axios.delete(import.meta.env.VITE_REACT_APP_ENDPOINT+`/deleteusers/${data.id}`);
       setIsSubmitted(!isSubmitted);
     } catch (error) {
       console.log(error); 
@@ -69,6 +70,7 @@ const Users = () => {
 
   return (
     <Box>
+
       <UserForm 
         addUsers={addUsers}
         isSubmitted={isSubmitted} 

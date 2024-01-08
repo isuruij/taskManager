@@ -58,7 +58,7 @@ router.post("/users", async (req, res) => {
       res.status(400).send({ message: "Bad Request", error });
     }
   }); 
-   
+    
 
 //delete the user which that has the similar id in the params 
   router.delete("/deleteusers/:id", async (req, res) => {
