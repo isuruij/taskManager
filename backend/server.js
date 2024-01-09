@@ -3,10 +3,10 @@ require("./db/mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRouter = require("./router");
-const port = 3001;
+const port = 3005;  
 const host = '0.0.0.0';
- 
-const app = express();      
+  
+const app = express();         
  
 app.use(cors());  
 app.use(bodyParser.json());
