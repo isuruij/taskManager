@@ -60,7 +60,7 @@ const Users = () => {
     try {
       
       console.log(data.id);
-      await Axios.delete(`import.meta.env.VITE_REACT_APP_ENDPOINT/deleteusers/${data.id}`);
+      await Axios.delete(`http://16.170.241.48:3005/deleteusers/${data.id}`);
       setIsSubmitted(!isSubmitted);
     } catch (error) {
       console.log(error); 
