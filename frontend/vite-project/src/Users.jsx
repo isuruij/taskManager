@@ -18,7 +18,7 @@ const Users = () => {
 
   const getUsers = async () => {
     try {
-      const response = await Axios.get(`http://16.170.241.48:3005/users`);
+      const response = await Axios.get(`http://localhost:3005/users`);
       setUsers(response.data);
       console.log("users are set");
       // Incrementing tableKey to force a re-render of UserTable
@@ -31,7 +31,7 @@ const Users = () => {
   const addUsers = async (data) => {
     const payload = data;
     try {
-      await Axios.post("http://16.170.241.48:3005/users", payload);
+      await Axios.post("http://localhost:3005/users", payload);
       setIsSubmitted(!isSubmitted);
       setisEdit(false);
     } catch (error) {
@@ -43,7 +43,7 @@ const Users = () => {
   const updateUser = async (data) => {
     const payload = data;
     try {
-      await Axios.patch("http://16.170.241.48:3005/updateusers", payload);
+      await Axios.patch("http://localhost:3005/updateusers", payload);
       setIsSubmitted(!isSubmitted);
       setisEdit(false);
     } catch (error) {
@@ -60,7 +60,7 @@ const Users = () => {
     try {
       
       console.log(data.id);
-      await Axios.delete(`http://16.170.241.48:3005/deleteusers/${data.id}`);
+      await Axios.delete(`http://localhost:3005/deleteusers/${data.id}`);
       setIsSubmitted(!isSubmitted);
     } catch (error) {
       console.log(error); 
