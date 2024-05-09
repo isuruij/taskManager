@@ -12,8 +12,11 @@ import React from "react";
 
 const UserTable = ({ rows, selectedUser, deleteUser }) => {
   return (
-    <TableContainer component={Paper} sx={{ width: "500px" }}>
-      <h5>{rows.length}</h5>
+    <TableContainer
+      component={Paper}
+      sx={{ width: "500px", borderRadius: "10px" }}
+    >
+      <h5>{rows.length} Tasks</h5>
       <Table>
         <TableHead>
           <TableRow>
@@ -38,9 +41,13 @@ const UserTable = ({ rows, selectedUser, deleteUser }) => {
                 </TableCell>
                 <TableCell>
                   <Button
-                    sx={{ margin: "0px 10px" }}
+                    sx={{ margin: "0px -10px" }}
                     onClick={() => {
-                      selectedUser({ id: row.id, time: row.time, discription: row.discription});
+                      selectedUser({
+                        id: row.id,
+                        time: row.time,
+                        discription: row.discription,
+                      });
                     }}
                   >
                     Update

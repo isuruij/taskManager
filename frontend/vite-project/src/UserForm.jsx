@@ -29,6 +29,7 @@ const UserForm = ({ addUsers, isSubmitted, data, isEdit, updateUser }) => {
           backgroundColor: "white",
           marginBottom: "30px",
           display: "block",
+          borderRadius: "10px",
         }}
       >
         <Grid item xs={12}>
