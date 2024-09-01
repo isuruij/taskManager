@@ -3,7 +3,8 @@ import UserForm from "./UserForm";
 import UserTable from "./UserTable";
 import { Box } from "@mui/material";
 import Axios from "axios";
-import { json } from "react-router-dom";
+import { baseURL,endPoints } from './services';
+
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -18,7 +19,7 @@ const Users = () => {
 
   const getUsers = async () => {
     try {
-      const response = await Axios.get(`http://localhost:3005/users`);
+      const response = await Axios.get(baseURL + endPoints.GETUSERS);
       setUsers(response.data);
       console.log("users are set");
       // Incrementing tableKey to force a re-render of UserTable
@@ -31,7 +32,7 @@ const Users = () => {
   const addUsers = async (data) => {
     const payload = data;
     try {
-      await Axios.post("http://localhost:3005/users", payload);
+      await Axios.post(baseURL + endPoints.ADDUSERS, payload);
       setIsSubmitted(!isSubmitted);
       setisEdit(false);
     } catch (error) {
@@ -42,7 +43,7 @@ const Users = () => {
   const updateUser = async (data) => {
     const payload = data;
     try {
-      await Axios.patch("http://localhost:3005/updateusers", payload);
+      await Axios.patch(baseURL + endPoints.UPDATEUSERS, payload);
       setIsSubmitted(!isSubmitted);
       setisEdit(false);
     } catch (error) {
@@ -53,7 +54,7 @@ const Users = () => {
   const deleteUser = async (data) => {
     try {
       console.log(data.id);
-      await Axios.delete(`http://localhost:3005/deleteusers/${data.id}`);
+      await Axios.delete(`${baseURL + endPoints.DELETEUSERS}/${data.id}`);
       setIsSubmitted(!isSubmitted);
     } catch (error) {
       console.log(error);
