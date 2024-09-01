@@ -39,7 +39,6 @@ const Users = () => {
     }
   };
 
-
   const updateUser = async (data) => {
     const payload = data;
     try {
@@ -49,47 +48,43 @@ const Users = () => {
     } catch (error) {
       console.log(error);
     }
-
   };
 
-
-
-
   const deleteUser = async (data) => {
-    
     try {
-      
       console.log(data.id);
       await Axios.delete(`http://localhost:3005/deleteusers/${data.id}`);
       setIsSubmitted(!isSubmitted);
     } catch (error) {
-      console.log(error); 
+      console.log(error);
     }
-
   };
 
   return (
-    <Box>
-
-      <UserForm 
-        addUsers={addUsers}
-        isSubmitted={isSubmitted} 
-        data={selectedUser} 
-        isEdit={isEdit} 
-        updateUser={updateUser}
+    <div>
+      <Box>
+        <UserForm
+          addUsers={addUsers}
+          isSubmitted={isSubmitted}
+          data={selectedUser}
+          isEdit={isEdit}
+          updateUser={updateUser}
         />
-      {/* For this prop called key, you can give any name
+        {/* For this prop called key, you can give any name
       Through this prop called key we pass a unique key to UserTable component */}
-      <UserTable 
-        key={tableKey} 
-        rows={users} 
-        selectedUser={(data) => { 
-          setselectedUser(data);
-          setisEdit(true);
-        }} 
-        deleteUser={(data)=>{window.confirm("Are you sure?") && deleteUser(data)}}
-      />
-    </Box>
+        <UserTable
+          key={tableKey}
+          rows={users}
+          selectedUser={(data) => {
+            setselectedUser(data);
+            setisEdit(true);
+          }}
+          deleteUser={(data) => {
+            window.confirm("Are you sure?") && deleteUser(data);
+          }}
+        />
+      </Box>
+    </div>
   );
 };
 

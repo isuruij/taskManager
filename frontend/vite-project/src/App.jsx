@@ -11,7 +11,7 @@ function App() {
     <div>
 
       <h1>Welcome to Task Manager</h1>
-      <button onClick={()=>{navigate('/users')}} >Check IN</button>
+      <button onClick={()=>{navigate('/tasks')}} >Check IN</button>
      
     </div>
   )
